@@ -1,0 +1,46 @@
+name: Windows app
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+    paths:
+      - "windows/**"
+      - ".github/workflows/windows.yml"
+  pull_request:
+    paths: ["windows/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # needed to attach the zip to a release on tag pushes
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Publish (x64, self-contained, unpackaged)
+        run: >
+          dotnet publish windows/SlideSwitch/SlideSwitch.csproj
+          -c Release -r win-x64 -p:Platform=x64 --self-contained true
+          -o publish/SlideSwitch
+
+      - name: Zip
+        shell: pwsh
+        run: Compress-Archive -Path publish/SlideSwitch -DestinationPath SlideSwitch-windows-x64.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SlideSwitch-windows-x64
+          path: SlideSwitch-windows-x64.zip
+
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: SlideSwitch-windows-x64.zip

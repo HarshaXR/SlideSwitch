@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+mac/build/
+xcuserdata/
+*.xcuserstate
+
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+android/.kotlin/
+*.iml
+
+# Windows / .NET
+windows/**/bin/
+windows/**/obj/
+windows/.vs/
+*.user
+
+# Local tooling
+.claude/

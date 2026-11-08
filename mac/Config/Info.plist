@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>SlideSwitch listens on your local network so your phone can control your presentation.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_slideswitch._tcp</string>
+	</array>
+	<key>NSAccessibilityUsageDescription</key>
+	<string>SlideSwitch presses arrow keys in your presentation app when you tap buttons on your phone.</string>
+</dict>
+</plist>

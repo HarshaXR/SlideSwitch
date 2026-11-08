@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="SlideSwitch.Controls.CapsuleSelector"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Capsule segmented control with a sliding selection pill (Fluent fills + motion). -->
+    <Border x:Name="Track"
+            CornerRadius="24"
+            Padding="4"
+            Background="{ThemeResource ControlFillColorSecondaryBrush}"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+            BorderThickness="1">
+        <Grid>
+            <Border x:Name="Pill"
+                    HorizontalAlignment="Left"
+                    CornerRadius="20"
+                    Background="{ThemeResource ControlFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+                    BorderThickness="1">
+                <Border.RenderTransform>
+                    <TranslateTransform x:Name="PillShift" />
+                </Border.RenderTransform>
+            </Border>
+            <StackPanel x:Name="ItemsPanel" Orientation="Horizontal" />
+        </Grid>
+    </Border>
+</UserControl>

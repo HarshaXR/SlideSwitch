@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SlideSwitch.Pages.ConnectPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:services="using:SlideSwitch.Services"
+    Background="Transparent">
+
+    <Grid Padding="56,28,56,28" RowSpacing="20" MaxWidth="1100" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="440" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- ===== Pairing card: "Pair a Device" (QR) ⇄ "Pair Manually" ===== -->
+        <Border x:Name="PairCard" Style="{StaticResource BigCardStyle}">
+            <Grid ColumnSpacing="36">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="400" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Padding="0,14,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <StackPanel x:Name="QrHeading" Spacing="8">
+                            <TextBlock Text="Pair a Device" FontSize="40" FontWeight="Bold" />
+                            <TextBlock Text="Scan the QR with your phone's camera." FontSize="20" TextWrapping="Wrap" MaxWidth="320" HorizontalAlignment="Left" />
+                        </StackPanel>
+                        <StackPanel x:Name="ManualHeading" Spacing="8" Visibility="Collapsed" Opacity="0">
+                            <TextBlock Text="Pair Manually" FontSize="40" FontWeight="Bold" />
+                            <TextBlock Text="Enter the following on your device." FontSize="20" TextWrapping="Wrap" MaxWidth="320" HorizontalAlignment="Left" />
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Grid.Row="2" Spacing="12">
+                        <Button x:Name="BackButton" Click="Back_Click" Visibility="Collapsed" Height="40" CornerRadius="20" Width="250">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xE76B;" FontSize="12" />
+                                <TextBlock Text="Back to connected phones" />
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="ModeButton" Click="Mode_Click" Style="{StaticResource PillButtonStyle}" Width="250">
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <FontIcon x:Name="ModeIcon" Glyph="&#xE765;" FontSize="16" />
+                                <TextBlock x:Name="ModeText" Text="Pair Manually" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Column="1" Height="350">
+                    <!-- QR side: always white for scanning contrast. -->
+                    <Border x:Name="QrSurface" Background="White" CornerRadius="28" Padding="30">
+                        <Grid>
+                            <Image x:Name="QrImage" Stretch="Uniform" />
+                            <!-- Scanner sweep over the code. -->
+                            <Rectangle x:Name="ScanLine" Height="56" VerticalAlignment="Top" IsHitTestVisible="False">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#002F6FBF" Offset="0" />
+                                        <GradientStop Color="#552F6FBF" Offset="0.5" />
+                                        <GradientStop Color="#002F6FBF" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                                <Rectangle.RenderTransform>
+                                    <TranslateTransform x:Name="ScanShift" />
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Grid>
+                    </Border>
+                    <!-- Manual side: themed panel with code tiles, address and name. -->
+                    <Border x:Name="ManualSurface" CornerRadius="28" Padding="34,0" Visibility="Collapsed" Opacity="0"
+                            Background="{ThemeResource SolidBackgroundFillColorSecondaryBrush}">
+                        <StackPanel x:Name="ManualDetails" VerticalAlignment="Center" Spacing="20">
+                            <StackPanel.ChildrenTransitions>
+                                <TransitionCollection>
+                                    <EntranceThemeTransition IsStaggeringEnabled="True" FromVerticalOffset="20" />
+                                </TransitionCollection>
+                            </StackPanel.ChildrenTransitions>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- ===== Connected phones (left) + "Pair another device" (right) ===== -->
+        <Grid x:Name="ConnectedView" ColumnSpacing="28" Visibility="Collapsed" Opacity="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Style="{StaticResource BigCardStyle}">
+                <Grid RowSpacing="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Spacing="8" Padding="0,14,0,0">
+                        <TextBlock x:Name="PhonesTitle" Text="Connected Phones" FontSize="40" FontWeight="Bold" />
+                        <TextBlock Text="Keep your presentation app in front." FontSize="20" />
+                    </StackPanel>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <ItemsRepeater x:Name="PhonesList">
+                            <ItemsRepeater.Layout>
+                                <StackLayout Spacing="10" />
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="services:ClientRow">
+                                    <Grid ColumnSpacing="14" Padding="12" CornerRadius="18" Background="{ThemeResource SubtleFillColorSecondaryBrush}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border Width="44" Height="44" CornerRadius="12">
+                                            <Border.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                    <GradientStop Color="#FF35C3F3" Offset="0" />
+                                                    <GradientStop Color="#FF2F6FBF" Offset="1" />
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                            <FontIcon Glyph="&#xE8EA;" Foreground="White" FontSize="20" />
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{x:Bind Name}" FontSize="17" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                            <TextBlock Text="{x:Bind Address}" FontFamily="Cascadia Mono, Consolas" FontSize="13"
+                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                            <Ellipse Width="9" Height="9" Fill="{ThemeResource SystemFillColorSuccessBrush}" />
+                                            <TextBlock Text="Connected" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+            <Button Grid.Column="1" Click="PairAnother_Click" Style="{StaticResource PillButtonStyle}" Width="280"
+                    HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,34">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <FontIcon Glyph="&#xE710;" FontSize="14" />
+                    <TextBlock Text="Pair another device" />
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- ===== Status strip ===== -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10">
+            <Border Style="{StaticResource CardStyle}" CornerRadius="22" Padding="18,0" Height="44">
+                <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                    <Ellipse x:Name="StatusDot" Width="9" Height="9" Fill="{ThemeResource SystemFillColorCautionBrush}" />
+                    <TextBlock x:Name="StatusText" Text="Waiting for a phone" FontWeight="Medium" />
+                </StackPanel>
+            </Border>
+            <Border x:Name="ErrorPill" Visibility="Collapsed" CornerRadius="22" Padding="18,0" Height="44"
+                    Background="{ThemeResource SystemFillColorCriticalBackgroundBrush}">
+                <TextBlock x:Name="ErrorText" VerticalAlignment="Center" Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
+            </Border>
+        </StackPanel>
+    </Grid>
+</Page>

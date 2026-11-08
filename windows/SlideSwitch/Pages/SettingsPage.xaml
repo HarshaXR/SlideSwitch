@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SlideSwitch.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:SlideSwitch.Controls"
+    xmlns:services="using:SlideSwitch.Services"
+    Background="Transparent">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Padding="56,28,56,40" ColumnSpacing="22" MaxWidth="1100" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition IsStaggeringEnabled="True" />
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+
+            <StackPanel Spacing="22">
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="14">
+                        <TextBlock Text="Appearance" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <controls:CapsuleSelector x:Name="AppearanceSelector" HorizontalAlignment="Left" />
+                        <TextBlock Text="Match Windows, or keep SlideSwitch always light or always dark." TextWrapping="Wrap"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="14">
+                        <TextBlock Text="Pairing" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Click="NewCode_Click" CornerRadius="16">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <FontIcon Glyph="&#xE72C;" FontSize="13" />
+                                    <TextBlock Text="New pairing code" />
+                                </StackPanel>
+                            </Button>
+                            <Button Click="Restart_Click" CornerRadius="16">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <FontIcon Glyph="&#xE704;" FontSize="13" />
+                                    <TextBlock Text="Restart server" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                        <TextBlock x:Name="CodeInfo" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Firewall" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   Text="If your phone can't find this PC, allow SlideSwitch through Windows Defender Firewall on private networks." />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Spacing="22">
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="14">
+                        <TextBlock Text="Phones" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <Grid>
+                            <TextBlock x:Name="PairedText" Style="{StaticResource SubtitleTextBlockStyle}" FontSize="17" VerticalAlignment="Center" />
+                            <Button x:Name="ForgetButton" Click="Forget_Click" HorizontalAlignment="Right" CornerRadius="16">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <FontIcon Glyph="&#xE74D;" FontSize="13" />
+                                    <TextBlock Text="Forget all" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                        <TextBlock x:Name="NoPhonesText" Text="No phones connected right now." Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <ItemsRepeater x:Name="PhonesList">
+                            <ItemsRepeater.Layout>
+                                <StackLayout Spacing="8" />
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="services:ClientRow">
+                                    <Grid ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Ellipse Width="9" Height="9" Fill="{ThemeResource SystemFillColorSuccessBrush}" />
+                                        <TextBlock Grid.Column="1" Text="{x:Bind Name}" FontWeight="Medium" />
+                                        <TextBlock Grid.Column="2" Text="{x:Bind Address}" Style="{StaticResource CaptionTextBlockStyle}"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Activity" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock x:Name="NoActivityText" Text="Commands from your phone will appear here." Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <ItemsRepeater x:Name="ActivityList">
+                            <ItemsRepeater.Layout>
+                                <StackLayout Spacing="6" />
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="services:LogRow">
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <FontIcon Glyph="{x:Bind Glyph}" FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        <TextBlock Grid.Column="1" Text="{x:Bind Text}" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Grid.Column="2" Text="{x:Bind Time}" Style="{StaticResource CaptionTextBlockStyle}"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

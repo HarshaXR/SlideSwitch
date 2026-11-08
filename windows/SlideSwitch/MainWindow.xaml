@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="SlideSwitch.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:SlideSwitch.Controls"
+    Title="SlideSwitch">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid x:Name="Root">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Drag region for the custom title bar (caption buttons sit top-right). -->
+        <Grid x:Name="AppTitleBar" Height="40" VerticalAlignment="Top" Grid.RowSpan="2" Background="Transparent" />
+
+        <!-- Header: wordmark + capsule nav (same layout as the Mac app). -->
+        <Grid Grid.Row="0" Padding="56,52,56,0">
+            <StackPanel>
+                <TextBlock Text="SlideSwitch" FontSize="44" FontWeight="Bold" />
+                <TextBlock Text="For Windows" FontSize="20" Margin="2,-4,0,0" />
+            </StackPanel>
+            <controls:CapsuleSelector x:Name="Nav" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,6,0,0" />
+        </Grid>
+
+        <Frame x:Name="PageFrame" Grid.Row="1" />
+
+        <!-- First-launch welcome: colour field + frosted Acrylic card. -->
+        <Grid x:Name="Welcome" Grid.RowSpan="2" Visibility="Collapsed">
+            <Rectangle>
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FF35C3F3" Offset="0" />
+                        <GradientStop Color="#FF2F6FBF" Offset="0.35" />
+                        <GradientStop Color="#FF7B4DD6" Offset="0.65" />
+                        <GradientStop Color="#FFF0628E" Offset="0.9" />
+                        <GradientStop Color="#FFF6A04D" Offset="1" />
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Border x:Name="WelcomeCard"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Padding="140,64" CornerRadius="40"
+                    BorderBrush="#40FFFFFF" BorderThickness="1">
+                <Border.Background>
+                    <AcrylicBrush TintColor="#FFFFFFFF" TintOpacity="0.25" TintLuminosityOpacity="0.35" FallbackColor="#CCFFFFFF" />
+                </Border.Background>
+                <StackPanel Spacing="36" HorizontalAlignment="Center">
+                    <StackPanel Spacing="18" HorizontalAlignment="Center">
+                        <TextBlock Text="Welcome to" FontSize="28" HorizontalAlignment="Center" Foreground="#FF111111" />
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="SlideSwitch" FontSize="56" FontWeight="Bold" Foreground="#FF111111" />
+                            <TextBlock Text="For Windows" FontSize="24" Margin="2,-6,0,0" Foreground="#FF111111" />
+                        </StackPanel>
+                    </StackPanel>
+                    <Button x:Name="ContinueButton" Content="Continue" Click="Continue_Click"
+                            Style="{StaticResource AccentButtonStyle}"
+                            HorizontalAlignment="Center" Width="260" Height="48" CornerRadius="24" FontSize="16" FontWeight="SemiBold" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
