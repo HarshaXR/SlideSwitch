@@ -3,142 +3,197 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>SlideSwitch — your slides, from your pocket</title>
-  <meta name="description" content="SlideSwitch turns your Android phone into a presentation remote for Keynote, PowerPoint and Google Slides on macOS and Windows.">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)">
-  <meta property="og:title" content="SlideSwitch">
-  <meta property="og:description" content="Your slides, from your pocket. A presentation remote for Android, macOS and Windows.">
+  <title>SlideSwitch — Leave the laptop. Own the room.</title>
+  <meta name="description" content="SlideSwitch turns your phone into a presentation remote. Walk the stage, keep eye contact, and change slides from anywhere in the room. Free for Android, Mac and Windows.">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:title" content="SlideSwitch — Leave the laptop. Own the room.">
+  <meta property="og:description" content="Your phone is now your presentation remote. Free for Android, Mac and Windows.">
   <meta property="og:image" content="assets/banner.jpg">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Floating translucent nav (content scrolls underneath) -->
-  <header class="nav" id="nav">
-    <a class="nav-brand" href="#top" aria-label="SlideSwitch home">SlideSwitch<span>.</span></a>
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="SlideSwitch home">
+      <img src="assets/favicon.svg" alt="" width="26" height="26">
+      SlideSwitch
+    </a>
     <nav class="nav-links" aria-label="Sections">
-      <a href="#how">How it works</a>
-      <a href="#apps">Apps</a>
-      <a href="#download">Download</a>
+      <a href="#try">Try it</a>
+      <a href="#pairing">Pairing</a>
+      <a href="#remote">The remote</a>
+      <a href="#privacy">Privacy</a>
     </nav>
-    <a class="btn btn-primary btn-small" href="#download">Get SlideSwitch</a>
+    <a class="btn btn-primary btn-small" href="#download">Download</a>
   </header>
 
   <main id="top">
-    <!-- Hero -->
+    <!-- ============ Hero ============ -->
     <section class="hero">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <p class="hero-kicker reveal">Your slides, from your pocket.</p>
-      <h1 class="hero-title reveal">SlideSwitch<span>.</span></h1>
-      <p class="hero-sub reveal">Turn your Android phone into a presentation remote for Keynote, PowerPoint and Google Slides, on your Mac or Windows PC. Pair once with a QR code and walk the stage.</p>
+      <p class="pill reveal">Free on Android, Mac and Windows</p>
+      <img class="app-icon reveal" src="assets/favicon.svg" alt="" width="104" height="104">
+      <p class="eyebrow reveal">SlideSwitch</p>
+      <h1 class="hero-title reveal">Leave the laptop.<br>Own the room.</h1>
+      <p class="hero-sub reveal">Your phone becomes your clicker. Walk the stage, look people in the eye, and move through your slides from anywhere in the room.</p>
       <div class="hero-actions reveal">
-        <a class="btn btn-primary" id="hero-download" href="#download">Download</a>
-        <a class="btn btn-ghost" href="https://github.com/HarshaXR/SlideSwitch">View on GitHub</a>
+        <a class="btn btn-primary btn-large" id="hero-download" href="#download">Download SlideSwitch</a>
+        <a class="link-more" href="#try">See it in action <span aria-hidden="true">›</span></a>
       </div>
-      <figure class="hero-shot reveal">
-        <img src="assets/mac-connected-light.jpg" alt="SlideSwitch for Mac showing two connected phones" width="1600" height="1171" class="only-light">
-        <img src="assets/mac-connected-dark.jpg" alt="SlideSwitch for Mac in dark mode showing two connected phones" width="1600" height="1171" class="only-dark">
-      </figure>
+      <p class="fineprint reveal">Free · Works with Keynote, PowerPoint and Google Slides</p>
     </section>
 
-    <!-- How it works -->
-    <section class="section" id="how">
-      <h2 class="section-title reveal">Three steps. No cables.</h2>
-      <ol class="steps">
-        <li class="card step reveal">
-          <span class="step-num">1</span>
-          <h3>Open the companion</h3>
-          <p>Run SlideSwitch on your Mac or PC. It shows a pairing code and a QR code, and announces itself on your Wi-Fi.</p>
-        </li>
-        <li class="card step reveal">
-          <span class="step-num">2</span>
-          <h3>Pair your phone</h3>
-          <p>Scan the QR with your camera, tap the computer in the list, or type the code. The phone remembers it next time.</p>
-        </li>
-        <li class="card step reveal">
-          <span class="step-num">3</span>
-          <h3>Present</h3>
-          <p>Big Next and Previous buttons, Start, End and a black screen. Keys go to whatever app is in front.</p>
-        </li>
-      </ol>
+    <!-- ============ Live demo ============ -->
+    <section class="stage reveal" id="try" aria-label="Interactive demo">
+      <div class="stage-inner">
+        <!-- The audience's screen -->
+        <div class="screen" aria-live="polite">
+          <div class="screen-bar"><i></i><i></i><i></i><span id="deck-counter">1 / 5</span></div>
+          <div class="deck" id="deck">
+            <article class="slide slide-title">
+              <p class="slide-kicker">Quarterly review</p>
+              <h3>Q3 was our best quarter yet.</h3>
+              <p class="slide-by">Harsha · All-hands</p>
+            </article>
+            <article class="slide slide-chart">
+              <h3>Growth, month by month</h3>
+              <div class="bars"><i style="--h:.35"></i><i style="--h:.5"></i><i style="--h:.42"></i><i style="--h:.68"></i><i style="--h:.6"></i><i class="hot" style="--h:1"></i></div>
+            </article>
+            <article class="slide slide-list">
+              <h3>What made the difference</h3>
+              <ul><li>We talked to customers every week</li><li>We shipped smaller, sooner</li><li>We said no to the rest</li></ul>
+            </article>
+            <article class="slide slide-quote">
+              <p>“The best presenters never look at their laptop.”</p>
+            </article>
+            <article class="slide slide-end">
+              <h3>Thank you.</h3>
+              <p>Questions?</p>
+            </article>
+          </div>
+          <div class="blackout" id="blackout"><span id="blackout-text"></span></div>
+        </div>
+
+        <!-- The presenter's phone -->
+        <div class="phone" role="group" aria-label="SlideSwitch remote">
+          <div class="phone-top">
+            <span class="status"><i></i>Connected</span>
+            <strong>Studio Mac</strong>
+          </div>
+          <button class="key key-next" data-action="next" aria-label="Next slide">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg>
+            <span>Next</span>
+          </button>
+          <button class="key key-prev" data-action="previous" aria-label="Previous slide">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg>
+            <span>Previous</span>
+          </button>
+          <div class="key-row">
+            <button class="key key-small" data-action="start" aria-label="Start from the beginning"><b class="dot start"></b>Start</button>
+            <button class="key key-small" data-action="black" aria-label="Black screen"><b class="dot black"></b>Black</button>
+            <button class="key key-small" data-action="end" aria-label="End presentation"><b class="dot end"></b>End</button>
+          </div>
+        </div>
+      </div>
+      <p class="stage-hint">Go ahead, tap <b>Next</b>. Or use your arrow keys.</p>
     </section>
 
-    <!-- Apps -->
-    <section class="section" id="apps">
-      <h2 class="section-title reveal">Made for each platform.</h2>
-      <p class="section-sub reveal">Liquid Glass on Mac, Fluent on Windows, and an Apple-style remote on Android.</p>
+    <!-- ============ Manifesto ============ -->
+    <section class="manifesto">
+      <p id="manifesto">Great talks don't happen behind a laptop. They happen when you step out, move with your story and hold the room. SlideSwitch puts your slides in your hand, so the only thing your audience watches is you.</p>
+    </section>
 
-      <div class="showcase">
-        <article class="card showcase-item reveal">
-          <div class="showcase-text">
-            <h3>Android remote</h3>
-            <p>Finds computers on your network automatically, with a light and dark mode and big, satisfying buttons.</p>
-          </div>
-          <div class="phones">
-            <img src="assets/android-welcome.png" alt="Android welcome screen" width="450" height="1000" loading="lazy">
-            <img src="assets/android-connect.png" alt="Android connect screen with available devices" width="450" height="1000" loading="lazy">
-            <img src="assets/android-settings-dark.png" alt="Android settings in dark mode" width="450" height="1000" loading="lazy">
-          </div>
-        </article>
+    <!-- ============ Pairing ============ -->
+    <section class="feature" id="pairing">
+      <div class="feature-icon reveal" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM18 18h2v2h-2z" fill="currentColor"/></svg>
+      </div>
+      <h2 class="feature-title reveal">Ready before<br><span class="grad">you reach the stage.</span></h2>
+      <p class="feature-sub reveal">Open SlideSwitch on your computer and point your camera at the code. That's it. Your phone remembers it, so next time it just connects.</p>
 
-        <article class="card showcase-item reveal">
-          <div class="showcase-text">
-            <h3>Mac companion</h3>
-            <p>Liquid Glass throughout: an animated QR, morphing pairing cards, and System, Light or Dark appearance.</p>
+      <div class="pair-demo reveal">
+        <div class="pair-card">
+          <div class="qr" aria-hidden="true">
+            <div class="qr-grid" id="qr-grid"></div>
+            <div class="qr-scan"></div>
           </div>
-          <div class="screens">
-            <img src="assets/mac-welcome.jpg" alt="SlideSwitch for Mac welcome screen on Liquid Glass" width="1600" height="1171" loading="lazy">
-            <img src="assets/mac-settings-light.jpg" alt="SlideSwitch for Mac settings" width="1600" height="1171" loading="lazy">
+          <div class="pair-text">
+            <p class="pair-label">Or type the code</p>
+            <div class="code" id="code"><span>4</span><span>8</span><span>2</span><span>9</span><span>1</span><span>3</span></div>
+            <p class="pair-note">Your computer also shows up on your phone automatically when you're on the same Wi-Fi.</p>
           </div>
-        </article>
-
-        <article class="card showcase-item reveal">
-          <div class="showcase-text">
-            <h3>Windows companion</h3>
-            <p>Native WinUI 3 with Mica and Fluent controls, and the same pairing flow as the Mac app.</p>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
-    <!-- Download -->
-    <section class="section" id="download">
-      <h2 class="section-title reveal">Download.</h2>
-      <p class="section-sub reveal">Free and open source. Get the phone app and the companion for your computer.</p>
+    <!-- ============ The remote ============ -->
+    <section class="feature" id="remote">
+      <div class="feature-icon reveal" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <h2 class="feature-title reveal">Every button you need.<br><span class="grad">None you don't.</span></h2>
+      <p class="feature-sub reveal">Big enough to hit without looking down, so your eyes stay on the people in front of you.</p>
+
+      <div class="tiles">
+        <article class="tile reveal"><span class="tile-glyph g-blue">›</span><h3>Next</h3><p>A huge target you can find by feel. Tap it mid-sentence.</p></article>
+        <article class="tile reveal"><span class="tile-glyph g-grey">‹</span><h3>Previous</h3><p>Someone asks about that chart? Step back in a tap.</p></article>
+        <article class="tile reveal"><span class="tile-glyph g-green">▶</span><h3>Start</h3><p>Launch the slideshow from the first slide, right from your seat.</p></article>
+        <article class="tile reveal"><span class="tile-glyph g-dark">■</span><h3>Black screen</h3><p>Pull every eye back to you for the moment that matters.</p></article>
+        <article class="tile reveal"><span class="tile-glyph g-orange">✕</span><h3>End</h3><p>Finish cleanly, with no fumbling for the Escape key.</p></article>
+        <article class="tile reveal"><span class="tile-glyph g-violet">◐</span><h3>Light or dark</h3><p>Easy on the eyes in a bright office or a dark auditorium.</p></article>
+      </div>
+    </section>
+
+    <!-- ============ Works with ============ -->
+    <section class="feature works">
+      <h2 class="feature-title reveal">Works with the slides<br><span class="grad">you already have.</span></h2>
+      <p class="feature-sub reveal">No plugins and no exporting. Open your deck the way you always do.</p>
+      <div class="chips reveal">
+        <span class="chip">Keynote</span>
+        <span class="chip">PowerPoint</span>
+        <span class="chip">Google Slides</span>
+        <span class="chip">on Mac</span>
+        <span class="chip">on Windows</span>
+      </div>
+    </section>
+
+    <!-- ============ Privacy ============ -->
+    <section class="feature" id="privacy">
+      <p class="eyebrow eyebrow-muted reveal">Privacy</p>
+      <h2 class="feature-title reveal">Your talk stays<br><span class="grad">in the room.</span></h2>
+      <div class="privacy reveal">
+        <article><h3>No account.</h3><p>Install it, pair it, present. There's nothing to sign up for.</p></article>
+        <article><h3>Stays on your Wi-Fi.</h3><p>Your phone talks straight to your computer. Nothing goes through the internet.</p></article>
+        <article><h3>Only your phone.</h3><p>A one-time code means only the phones you pair can change your slides.</p></article>
+      </div>
+    </section>
+
+    <!-- ============ Download ============ -->
+    <section class="download-section" id="download">
+      <img class="app-icon reveal" src="assets/favicon.svg" alt="" width="88" height="88">
+      <h2 class="feature-title reveal">Your next talk<br><span class="grad">starts here.</span></h2>
+      <p class="feature-sub reveal">Get the remote on your phone and the companion on the computer you present from.</p>
 
       <div class="downloads">
-        <article class="card download reveal" data-platform="android">
-          <div class="dl-icon dl-android" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Android</h3>
-          <p>The remote. Android 8 or later.</p>
-          <a class="btn btn-primary" href="https://github.com/HarshaXR/SlideSwitch/releases/latest/download/SlideSwitch-android.apk">Download APK</a>
-          <small>Allow installs from your browser when Android asks.</small>
-        </article>
-
-        <article class="card download reveal" data-platform="mac">
-          <div class="dl-icon dl-mac" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="10.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M2 18.5h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h3>macOS</h3>
-          <p>The companion. macOS 26 Tahoe or later.</p>
-          <a class="btn btn-primary" href="https://github.com/HarshaXR/SlideSwitch/releases/latest/download/SlideSwitch-mac.zip">Download for Mac</a>
-          <small>Not notarized yet: right-click the app › Open the first time.</small>
-        </article>
-
-        <article class="card download reveal" data-platform="windows">
-          <div class="dl-icon dl-windows" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 20h6M12 16v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Windows</h3>
-          <p>The companion. Windows 10 1809 or later, x64.</p>
-          <a class="btn btn-primary" href="https://github.com/HarshaXR/SlideSwitch/releases/latest/download/SlideSwitch-windows-x64.zip">Download for Windows</a>
-          <small>Unzip and run SlideSwitch.exe. SmartScreen may ask once.</small>
-        </article>
+        <a class="dl reveal" data-platform="android" href="https://github.com/HarshaXR/SlideSwitch/releases/latest/download/SlideSwitch-android.apk">
+          <span class="dl-kind">The remote</span>
+          <span class="dl-name">Android</span>
+          <span class="dl-meta">Android 8 or later</span>
+          <span class="dl-cta">Download APK ↓</span>
+        </a>
+        <a class="dl reveal" data-platform="mac" href="https://github.com/HarshaXR/SlideSwitch/releases/latest/download/SlideSwitch-mac.zip">
+          <span class="dl-kind">The companion</span>
+          <span class="dl-name">Mac</span>
+          <span class="dl-meta">macOS Tahoe or later</span>
+          <span class="dl-cta">Download for Mac ↓</span>
+        </a>
+        <a class="dl reveal" data-platform="windows" href="https://github.com/HarshaXR/SlideSwitch/releases/latest/download/SlideSwitch-windows-x64.zip">
+          <span class="dl-kind">The companion</span>
+          <span class="dl-name">Windows</span>
+          <span class="dl-meta">Windows 10 and 11</span>
+          <span class="dl-cta">Download for Windows ↓</span>
+        </a>
       </div>
-      <p class="all-releases reveal"><a href="https://github.com/HarshaXR/SlideSwitch/releases">All releases and source code →</a></p>
+      <p class="fineprint reveal">Free and open source · <a href="https://github.com/HarshaXR/SlideSwitch">Source on GitHub</a> · <a href="https://github.com/HarshaXR/SlideSwitch#install">First-time setup</a></p>
     </section>
   </main>
 
