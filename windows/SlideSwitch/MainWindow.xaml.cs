@@ -15,7 +15,7 @@ public sealed partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        _core = new AppCore(DispatcherQueue.GetForCurrentThread());
+        _core = new AppCore(Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread());
 
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
