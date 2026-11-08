@@ -24,11 +24,15 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
+      # Visual Studio's MSBuild: the Windows App SDK resource (PRI) tasks don't load under `dotnet`.
+      - uses: microsoft/setup-msbuild@v2
+
       - name: Publish (x64, self-contained, unpackaged)
         run: >
-          dotnet publish windows/SlideSwitch/SlideSwitch.csproj
-          -c Release -r win-x64 -p:Platform=x64 --self-contained true
-          -o publish/SlideSwitch
+          msbuild windows/SlideSwitch/SlideSwitch.csproj /restore /t:Publish
+          /p:Configuration=Release /p:Platform=x64 /p:RuntimeIdentifier=win-x64
+          /p:SelfContained=true /p:PublishDir=${{ github.workspace }}/publish/SlideSwitch/
+          /v:minimal
 
       - name: Zip
         shell: pwsh

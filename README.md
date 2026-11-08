@@ -100,7 +100,7 @@ Needs Windows 10 1809+, the .NET 8 SDK, and Visual Studio 2022 with the WinUI wo
 `windows/SlideSwitch.sln` and press F5, or:
 
 ```powershell
-dotnet publish windows/SlideSwitch/SlideSwitch.csproj -c Release -r win-x64 -p:Platform=x64 --self-contained true -o publish
+msbuild windows/SlideSwitch/SlideSwitch.csproj /restore /t:Publish /p:Configuration=Release /p:Platform=x64 /p:RuntimeIdentifier=win-x64 /p:SelfContained=true
 ```
 
 GitHub Actions ([`.github/workflows/windows.yml`](.github/workflows/windows.yml)) builds it on
